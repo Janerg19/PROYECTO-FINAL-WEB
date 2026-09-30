@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <!-- =====================================================
+         CONFIGURACIÓN DEL DOCUMENTO
+    ====================================================== -->
+
+    <meta charset="UTF-8">
+
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+
+    <!-- =====================================================
+         TÍTULO DINÁMICO
+    ====================================================== -->
+
+    <title>
+
+        {% block title %}
+
+            Flask Inventory
+
+        {% endblock %}
+
+    </title>
+
+
+    <!-- =====================================================
+         TAILWIND CSS
+
+         Para el proyecto académico utilizamos CDN.
+
+         En producción recomendamos compilar Tailwind
+         durante el proceso de construcción.
+    ====================================================== -->
+
+    <script
+        src="https://cdn.tailwindcss.com">
+    </script>
+
+
+    <!-- =====================================================
+         AXIOS
+
+         Librería utilizada para consumir nuestra API REST.
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">
+    </script>
+
+
+    <!-- =====================================================
+         CSS PROPIO
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/app.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body class="min-h-screen bg-slate-100">
+
+
+    <!-- =====================================================
+         NAVBAR
+
+         Partial reutilizable.
+    ====================================================== -->
+
+    {% include "partials/_navbar.html" %}
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main
+        class="mx-auto max-w-7xl px-6 py-8"
+    >
+
+
+        <!-- Partial de mensajes -->
+
+        {% include "partials/_alerts.html" %}
+
+
+        <!-- =================================================
+             BLOCK CONTENT
+
+             Cada página puede reemplazar este contenido.
+        ================================================== -->
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/api.js'
+        ) }}"
+    ></script>
+  <script
+        src="{{ url_for(
+            'static',
+            filename='js/app.js'
+        ) }}"
+    ></script>
+
+</body>
+
+</html>
