@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RIUL — Prototipo funcional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============ ICON SPRITE ============ -->
+<svg style="display:none">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5M6 10v9h5v-5h2v5h5v-9"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c1.4-4 4-5.6 7-5.6s5.6 1.6 7 5.6"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M8 15h8"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v3m-3 3h6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5H4.5S6 14 6 10Z"/><path d="M10 19a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-node" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.2 10.5 16M17.2 7.2 13.5 16M7.2 6h9.6"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.5 2.9 6.2 6.7.7-5 4.7 1.4 6.6L12 17.6l-6 3.1 1.4-6.6-5-4.7 6.7-.7Z"/></symbol>
+</svg>
+
+<!-- ============ LOGIN ============ -->
+<div id="view-login">
+  <div class="login-hero">
+    <svg class="network-bg" width="100%" height="100%" viewBox="0 0 500 700" preserveAspectRatio="xMidYMid slice">
+      <g stroke="#3E4B82" stroke-width="1">
+        <line x1="40" y1="90" x2="180" y2="180"/><line x1="180" y1="180" x2="120" y2="320"/>
+        <line x1="180" y1="180" x2="340" y2="140"/><line x1="340" y1="140" x2="430" y2="260"/>
+        <line x1="120" y1="320" x2="260" y2="400"/><line x1="260" y1="400" x2="430" y2="260"/>
+        <line x1="260" y1="400" x2="180" y2="540"/><line x1="180" y1="540" x2="360" y2="600"/>
+        <line x1="430" y1="260" x2="420" y2="470"/><line x1="420" y1="470" x2="360" y2="600"/>
+      </g>
+      <g fill="#E3A008" opacity=".85">
+        <circle cx="40" cy="90" r="5"/><circle cx="180" cy="180" r="6"/><circle cx="340" cy="140" r="4"/>
+        <circle cx="430" cy="260" r="5"/><circle cx="120" cy="320" r="4"/><circle cx="260" cy="400" r="6"/>
+        <circle cx="180" cy="540" r="4"/><circle cx="420" cy="470" r="5"/><circle cx="360" cy="600" r="6"/>
+      </g>
+    </svg>
+    <div class="hero-top">
+      <div class="hero-brand"><span class="node-mark"><svg class="icon" style="stroke:var(--accent)"><use href="#i-node"/></svg></span> Red de Investigación · Universidad Libre</div>
+      <h1 class="hero-title">Cada semillero,<br>un nodo de la red.</h1>
+      <p class="hero-sub">RIUL conecta semilleros, proyectos y logros en un solo lugar: publica avances, valida participación y construye tu hoja de vida investigativa a medida que subes de nivel.</p>
+    </div>
+    <div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>32</b><span>Semilleros activos</span></div>
+        <div class="hero-stat"><b>1,204</b><span>Publicaciones</span></div>
+        <div class="hero-stat"><b>410</b><span>Logros validados</span></div>
+      </div>
+      <p class="hero-foot mt16">Prototipo funcional — datos de ejemplo, sin conexión a un backend real.</p>
+    </div>
+  </div>
+
+  <div class="login-panel">
+    <div class="login-card">
+      <div id="login-step-in">
+        <div class="eyebrow">Acceso institucional</div>
+        <h2>Inicia sesión en RIUL</h2>
+
+        <div class="field">
+          <label>Rol para esta demo</label>
+          <div class="role-pick">
+            <button class="active" onclick="pickLoginRole(this,'estudiante')">Estudiante</button>
+            <button onclick="pickLoginRole(this,'docente')">Docente líder</button>
+            <button onclick="pickLoginRole(this,'admin')">Administrador</button>
+          </div>
+        </div>
+        <div class="field"><label>Correo institucional</label><input type="text" placeholder="nombre@unilibre.edu.co" value="juliana.diaz@unilibre.edu.co"></div>
+        <div class="field"><label>Contraseña</label><input type="password" placeholder="••••••••" value="••••••••"></div>
+        <div class="row-split"><span></span><button class="link-btn">¿Olvidaste tu contraseña?</button></div>
+        <button class="btn btn-primary btn-block" onclick="login()">Iniciar sesión</button>
+
+        <div class="divider-or">o</div>
+        <button class="btn btn-outline btn-block" onclick="showRegister()">No tengo cuenta institucional — solicitar registro</button>
+      </div>
+
+      <div id="login-step-register" style="display:none">
+        <div class="eyebrow">Nuevo en RIUL</div>
+        <h2>Solicita tu registro</h2>
+        <div class="field"><label>Nombre completo</label><input type="text" placeholder="Nombre y apellidos"></div>
+        <div class="field"><label>Correo institucional</label><input type="text" placeholder="nombre@unilibre.edu.co"></div>
+        <div class="field"><label>Programa académico</label><input type="text" placeholder="Ej. Ingeniería de Sistemas"></div>
+        <div class="field">
+          <label>Soporte institucional</label>
+          <div class="upload-box"><svg class="icon" style="margin:0 auto 6px;display:block"><use href="#i-upload"/></svg>Adjuntar carnet o certificado (PDF/JPG)</div>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="submitRegister()">Enviar solicitud</button>
+        <button class="btn btn-outline btn-block mt8" onclick="showLogin()">Volver a iniciar sesión</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP SHELL ============ -->
+<div id="shell">
+  <div class="topbar">
+    <div class="brand"><span class="node-mark"><svg class="icon" style="width:24px;height:24px;stroke:var(--ink)"><use href="#i-node"/></svg></span> RIUL</div>
+    <div class="topbar-right">
+      <div class="role-switch">
+        <button id="rs-estudiante" onclick="setRole('estudiante')">Estudiante</button>
+        <button id="rs-docente" onclick="setRole('docente')">Docente líder</button>
+        <button id="rs-admin" onclick="setRole('admin')">Administrador</button>
+        <button id="rs-visitante" onclick="setRole('visitante')">Visitante</button>
+      </div>
+      <button class="icon-btn"><svg class="icon"><use href="#i-bell"/></svg></button>
+      <div class="topbar-user">
+        <div class="avatar" id="topbar-avatar" style="width:34px;height:34px;font-size:13px;background:var(--ink)">JD</div>
+      </div>
+      <button class="icon-btn" onclick="logout()" title="Cerrar sesión"><svg class="icon"><use href="#i-logout"/></svg></button>
+    </div>
+  </div>
+
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main">
+
+    <!-- ===== DASHBOARD ===== -->
+    <div class="view" id="view-dashboard">
+      <div class="page-head">
+        <div class="eyebrow">Panorama general</div>
+        <h1 id="dash-title">Bienvenida, Juliana</h1>
+        <p>Este es el resumen de actividad de tu red de investigación.</p>
+      </div>
+      <div class="grid grid-4 section-gap">
+        <div class="card kpi"><div class="icon-wrap" style="background:var(--accent-soft)"><svg class="icon" style="stroke:var(--accent-ink)"><use href="#i-star"/></svg></div><div class="label">XP total</div><div class="value mono" id="kpi-xp">1,240</div></div>
+        <div class="card kpi"><div class="icon-wrap" style="background:var(--violet-soft)"><svg class="icon" style="stroke:var(--violet)"><use href="#i-trophy"/></svg></div><div class="label">Nivel actual</div><div class="value mono" id="kpi-level">3 / 5</div></div>
+        <div class="card kpi"><div class="icon-wrap" style="background:var(--teal-soft)"><svg class="icon" style="stroke:var(--teal)"><use href="#i-shield"/></svg></div><div class="label">Insignias</div><div class="value mono">6</div></div>
+        <div class="card kpi"><div class="icon-wrap" style="background:var(--rose-soft)"><svg class="icon" style="stroke:var(--rose)"><use href="#i-chart"/></svg></div><div class="label">Ranking del semillero</div><div class="value mono">#4</div></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="flex between center section-gap"><h3>Publicaciones recientes</h3><button class="btn btn-outline btn-sm" onclick="showView('publicaciones')">Ver todo</button></div>
+          <div id="dash-feed"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="card">
+            <h3 class="section-gap">Próximos eventos</h3>
+            <div class="flex gap12" style="margin-bottom:14px"><span class="badge-dot" style="background:var(--rose)"></span><div><div style="font-weight:600;font-size:14px">Coloquio de semilleros 2026</div><div class="small">Auditorio principal · 10:00 a.m.</div></div></div>
+            <div class="flex gap12" style="margin-bottom:14px"><span class="badge-dot" style="background:var(--teal)"></span><div><div style="font-weight:600;font-size:14px">Taller de escritura científica</div><div class="small">Bloque B · 2:00 p.m.</div></div></div>
+            <div class="flex gap12"><span class="badge-dot" style="background:var(--accent)"></span><div><div style="font-weight:600;font-size:14px">Feria de proyectos</div><div class="small">Plazoleta central · 9:00 a.m.</div></div></div>
+          </div>
+          <div class="card">
+            <h3 class="section-gap">Convocatoria abierta</h3>
+            <p class="small" style="margin:0 0 12px">Semilleros de investigación aplicada — financiación 2026-II.</p>
+            <button class="btn btn-accent btn-sm" onclick="toast('Postulación enviada')">Postularse</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PERFIL ===== -->
+    <div class="view" id="view-perfil">
+      <div class="page-head"><div class="eyebrow">Hoja de vida investigativa</div><h1>Mi perfil</h1><p>Tu historial de participación, logros e insignias.</p></div>
+      <div class="card section-gap">
+        <div class="flex between center" style="flex-wrap:wrap;gap:20px">
+          <div class="flex gap12 center">
+            <div class="avatar" style="width:64px;height:64px;font-size:22px;background:var(--ink)">JD</div>
+            <div>
+              <h3 style="margin-bottom:2px">Juliana Díaz</h3>
+              <div class="small">Ingeniería de Sistemas · Semillero RIUL-Dev</div>
+              <div class="flex gap8 center mt8">
+                <div class="stars" id="perfil-stars"></div>
+                <span class="small">Nivel 3</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap8"><button class="btn btn-outline btn-sm">Editar perfil</button><button class="btn btn-primary btn-sm">Descargar CV</button></div>
+        </div>
+        <div class="mt16">
+          <div class="flex between small mt8" style="margin-bottom:6px"><span>Progreso de nivel</span><span class="mono" id="perfil-xp-label">1,240 / 2,000 XP</span></div>
+          <div class="progress"><div id="perfil-progress" style="width:62%"></div></div>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="section-gap">Registrar nuevo logro</h3>
+          <div class="field"><label>Tipo de logro</label>
+            <select id="logro-tipo"><option>Artículo</option><option>Ponencia</option><option>Proyecto</option><option>Patente</option></select>
+          </div>
+          <div class="field"><label>Título o descripción</label><input id="logro-titulo" type="text" placeholder="Ej. Ponencia en congreso nacional de software"></div>
+          <div class="field"><label>Evidencia</label><div class="upload-box"><svg class="icon" style="margin:0 auto 6px;display:block"><use href="#i-upload"/></svg>PDF, imagen o enlace</div></div>
+          <button class="btn btn-primary" onclick="submitLogro()"><svg class="icon" style="width:16px;height:16px"><use href="#i-plus"/></svg>Enviar a validación</button>
+        </div>
+        <div class="card">
+          <h3 class="section-gap">Hoja de vida investigativa</h3>
+          <div id="hv-stats"></div>
+          <div class="small mt16" style="font-weight:600;color:var(--ink)">Logros enviados a validación</div>
+          <div id="logros-pendientes" class="mt8"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SEMILLERO ===== -->
+    <div class="view" id="view-semillero">
+      <div class="page-head"><div class="eyebrow">Docente líder</div><h1>Gestión de semillero</h1><p>Administra integrantes, proyectos y avances de RIUL-Dev.</p></div>
+      <div class="card section-gap">
+        <div class="flex between center" style="flex-wrap:wrap;gap:16px">
+          <div><h3>Semillero RIUL-Dev</h3><p class="small" style="margin:4px 0 0">Facultad de Ingeniería · 12 integrantes · Activo desde 2023</p></div>
+          <button class="btn btn-outline btn-sm">Editar semillero</button>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="flex between center section-gap"><h3>Integrantes</h3><button class="btn btn-primary btn-sm" onclick="toast('Invitación enviada')"><svg class="icon" style="width:14px;height:14px"><use href="#i-plus"/></svg>Agregar</button></div>
+          <div id="integrantes-list"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="card">
+            <div class="flex between center section-gap"><h3>Proyectos</h3><button class="btn btn-outline btn-sm" onclick="toast('Formulario de proyecto abierto')">+ Nuevo</button></div>
+            <div class="post" style="margin-bottom:10px"><div style="font-weight:600;font-size:14.5px">Plataforma de trazabilidad académica</div><p class="small" style="margin:6px 0 10px">Modelo de datos y API para seguimiento de semilleros.</p><span class="chip chip-green">En curso</span></div>
+            <div class="post" style="margin-bottom:0"><div style="font-weight:600;font-size:14.5px">Predicción de deserción estudiantil</div><p class="small" style="margin:6px 0 10px">Modelo de machine learning con datos institucionales.</p><span class="chip chip-teal">Formulación</span></div>
+          </div>
+          <div class="card">
+            <div class="flex between center section-gap"><h3>Validar participación</h3></div>
+            <p class="small">3 estudiantes esperan validación de horas de investigación.</p>
+            <button class="btn btn-outline btn-sm" onclick="showView('admin')">Ir a validaciones</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PUBLICACIONES ===== -->
+    <div class="view" id="view-publicaciones">
+      <div class="page-head"><div class="eyebrow">Comunidad</div><h1>Publicaciones</h1><p>Comparte avances, proyectos y logros con la red.</p></div>
+      <div class="flex between center section-gap">
+        <div class="small">Feed de la red de investigación</div>
+        <button class="btn btn-primary" id="btn-crear-pub" onclick="openModal('modal-post')"><svg class="icon" style="width:16px;height:16px"><use href="#i-plus"/></svg>Crear publicación</button>
+      </div>
+      <div class="card"><div id="feed-full"></div></div>
+    </div>
+
+    <!-- ===== EVENTOS / CONVOCATORIAS ===== -->
+    <div class="view" id="view-eventos">
+      <div class="page-head"><div class="eyebrow">Agenda de la red</div><h1>Eventos y convocatorias</h1><p>Actividades académicas y oportunidades de financiación abiertas.</p></div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="section-gap">Próximos eventos</h3>
+          <div id="eventos-list"></div>
+        </div>
+        <div class="card">
+          <h3 class="section-gap">Convocatorias abiertas</h3>
+          <div id="convocatorias-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== GAMIFICACIÓN ===== -->
+    <div class="view" id="view-gamificacion">
+      <div class="page-head"><div class="eyebrow">Reconocimiento</div><h1>Gamificación</h1><p>XP, insignias y niveles según tu participación investigativa.</p></div>
+      <div class="card section-gap" style="background:var(--ink);color:#fff;border:none">
+        <div class="flex between center" style="flex-wrap:wrap;gap:20px">
+          <div class="level-badge">
+            <div class="hex"><b id="hex-level">3</b></div>
+            <div>
+              <div class="stars" id="gam-stars"></div>
+              <div style="margin-top:6px;font-size:14px;color:#B9C2E6">XP <span class="mono" id="gam-xp-label">1,240 / 2,000</span> para subir de nivel</div>
+            </div>
+          </div>
+          <button class="btn btn-accent" onclick="simulateActivity()"><svg class="icon" style="width:16px;height:16px"><use href="#i-star"/></svg>Simular nueva actividad (+80 XP)</button>
+        </div>
+        <div class="mt16"><div class="progress" style="background:#2A3768;border-color:#2A3768"><div id="gam-progress" style="width:62%"></div></div></div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="section-gap">Insignias</h3>
+          <div id="badges-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;text-align:center"></div>
+        </div>
+        <div class="card">
+          <h3 class="section-gap">Historial de actividades</h3>
+          <div id="xp-history"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ADMIN ===== -->
+    <div class="view" id="view-admin">
+      <div class="page-head"><div class="eyebrow">Administrador</div><h1>Validaciones pendientes</h1><p>Aprueba solicitudes de cuenta institucional y logros investigativos.</p></div>
+      <div class="card section-gap">
+        <h3 class="section-gap">Cuentas pendientes <span class="small mono" id="count-cuentas"></span></h3>
+        <table>
+          <thead><tr><th>Nombre</th><th>Correo institucional</th><th>Rol solicitado</th><th>Documento</th><th>Acción</th></tr></thead>
+          <tbody id="tabla-cuentas"></tbody>
+        </table>
+        <div class="empty-hint" id="empty-cuentas" style="display:none">No hay cuentas pendientes por validar.</div>
+      </div>
+      <div class="card">
+        <h3 class="section-gap">Logros pendientes <span class="small mono" id="count-logros"></span></h3>
+        <table>
+          <thead><tr><th>Estudiante</th><th>Tipo</th><th>Descripción</th><th>Acción</th></tr></thead>
+          <tbody id="tabla-logros"></tbody>
+        </table>
+        <div class="empty-hint" id="empty-logros" style="display:none">No hay logros pendientes por validar.</div>
+      </div>
+    </div>
+
+    <!-- ===== RANKING ===== -->
+    <div class="view" id="view-ranking">
+      <div class="page-head"><div class="eyebrow">Impacto y visibilidad</div><h1>Ranking y analítica institucional</h1><p>Clasificación pública de semilleros. Haz clic en una columna para ordenar.</p></div>
+      <div class="grid grid-4 section-gap">
+        <div class="card kpi"><div class="label">Semilleros activos</div><div class="value mono">32</div></div>
+        <div class="card kpi"><div class="label">Publicaciones totales</div><div class="value mono">1,204</div></div>
+        <div class="card kpi"><div class="label">Proyectos en curso</div><div class="value mono">58</div></div>
+        <div class="card kpi"><div class="label">Logros validados</div><div class="value mono">410</div></div>
+      </div>
+      <div class="card">
+        <table>
+          <thead><tr>
+            <th onclick="sortRanking('pos')">#</th>
+            <th onclick="sortRanking('nombre')">Semillero</th>
+            <th onclick="sortRanking('facultad')">Facultad</th>
+            <th onclick="sortRanking('xp')">XP total</th>
+            <th onclick="sortRanking('nivel')">Nivel</th>
+          </tr></thead>
+          <tbody id="tabla-ranking"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ MODAL: CREAR PUBLICACIÓN ============ -->
+<div class="modal-overlay" id="modal-post">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-post')">✕</button>
+    <h3>Nueva publicación</h3>
+    <div class="field"><label>Categoría</label>
+      <div class="chip-picker" id="post-cat-picker">
+        <button class="sel" data-cat="Logro" onclick="pickCat(this)">Logro</button>
+        <button data-cat="Proyecto" onclick="pickCat(this)">Proyecto</button>
+        <button data-cat="Evento" onclick="pickCat(this)">Evento</button>
+        <button data-cat="General" onclick="pickCat(this)">General</button>
+      </div>
+    </div>
+    <div class="field"><label>Título</label><input id="post-title" type="text" placeholder="Ej. Publicamos nuestro artículo en revista indexada"></div>
+    <div class="field"><label>Contenido</label><textarea id="post-body" rows="4" placeholder="Cuenta el detalle del avance, evento o logro..."></textarea></div>
+    <div class="field"><label>Evidencias</label><div class="upload-box"><svg class="icon" style="margin:0 auto 6px;display:block"><use href="#i-upload"/></svg>Arrastra un archivo o haz clic para adjuntar</div></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-post')" style="flex:1">Cancelar</button>
+      <button class="btn btn-primary" onclick="submitPost()" style="flex:1">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
