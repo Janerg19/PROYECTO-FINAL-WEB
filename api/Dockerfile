@@ -1,30 +1,31 @@
-# Multi-stage build para API
+# Multi-stage build para API Python
 
 # Stage 1: Build
-FROM node:20-alpine AS builder
+FROM python:3.11-slim AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install --only=production
+COPY requirements.txt ./
+RUN pip install --no-cache-dir --user -r requirements.txt
 
 # Stage 2: Run
-FROM node:20-alpine
+FROM python:3.11-slim
 
 WORKDIR /app
 
 # Crear usuario no root
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodejs -u 1001
+RUN groupadd -r pythonuser && useradd -r -g pythonuser pythonuser
 
 # Copiar dependencias desde builder
-COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+COPY --from=builder /root/.local /root/.local
 
 # Copiar código fuente
-COPY --chown=nodejs:nodejs src ./src
+COPY --chown=pythonuser:pythonuser src ./src
 
-USER nodejs
+ENV PATH=/root/.local/bin:$PATH
+
+USER pythonuser
 
 EXPOSE 3000
 
-CMD ["node", "src/server.js"]
+CMD ["python", "src/app.py"]

@@ -17,7 +17,7 @@ Segundo corte de la plataforma institucional para conectar a quienes investigan 
 ## Requisitos
 
 - **Docker** y **Docker Compose** instalados
-- **Node.js** 20+ (para desarrollo local, opcional)
+- **Python** 3.11+ (para desarrollo local, opcional)
 - **PostgreSQL** 16+ (para desarrollo local, opcional)
 
 ---
@@ -43,29 +43,23 @@ riul/
 │   ├── ER_diagram.md             # Diagrama ER en Mermaid
 │   ├── diccionario_de_datos.md   # Diccionario de datos completo
 │   └── README_db.md              # Documentación de la BD
-├── api/                       # Backend (Node.js + Express)
+├── api/                       # Backend (Python + Flask)
 │   ├── Dockerfile               # Multi-stage build
-│   ├── package.json            # Dependencias
+│   ├── requirements.txt        # Dependencias de Python
 │   └── src/
 │       ├── config/
-│       │   └── database.js      # Configuración de PostgreSQL
+│       │   └── database.py      # Configuración de PostgreSQL
 │       ├── middleware/
-│       │   └── auth.js         # Autenticación JWT y roles
+│       │   └── auth.py         # Autenticación JWT y roles
 │       ├── controllers/
-│       │   ├── authController.js
-│       │   ├── publicacionController.js
-│       │   ├── semilleroController.js
-│       │   ├── logroController.js
-│       │   ├── adminController.js
-│       │   └── rankingController.js
-│       ├── routes/
-│       │   ├── auth.js
-│       │   ├── publicaciones.js
-│       │   ├── semilleros.js
-│       │   ├── logros.js
-│       │   ├── admin.js
-│       │   └── ranking.js
-│       └── server.js            # Punto de entrada
+│       │   ├── auth_controller.py
+│       │   ├── publicacion_controller.py
+│       │   ├── semillero_controller.py
+│       │   ├── logro_controller.py
+│       │   ├── admin_controller.py
+│       │   └── ranking_controller.py
+│       ├── routes.py            # Definición de rutas
+│       └── app.py               # Punto de entrada Flask
 ├── web/                       # Frontend (HTML + CSS + JS vanilla)
 │   ├── Dockerfile               # Build con nginx
 │   ├── nginx/
