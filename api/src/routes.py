@@ -1,11 +1,11 @@
 from flask import Blueprint
-from .controllers.auth_controller import register, login, get_me
-from .controllers.publicacion_controller import get_publicaciones, create_publicacion, comentar, reaccionar, compartir
-from .controllers.semillero_controller import get_semilleros, get_semillero_by_id, solicitar_vinculacion, get_integrantes, resolver_vinculacion
-from .controllers.logro_controller import get_logros_pendientes, enviar_logro, get_mis_logros, aprobar_logro, rechazar_logro
-from .controllers.admin_controller import get_cuentas_pendientes, aprobar_cuenta, rechazar_cuenta, get_facultades, get_programas
-from .controllers.ranking_controller import get_ranking_semilleros, get_ranking_investigadores, get_kpis, get_indicadores_facultad, get_hoja_vida
-from .middleware.auth import authenticate_token, require_role, optional_auth
+from controllers.auth_controller import register, login, get_me
+from controllers.publicacion_controller import get_publicaciones, create_publicacion, comentar, reaccionar, compartir
+from controllers.semillero_controller import get_semilleros, get_semillero_by_id, solicitar_vinculacion, get_integrantes, resolver_vinculacion
+from controllers.logro_controller import get_logros_pendientes, enviar_logro, get_mis_logros, aprobar_logro, rechazar_logro
+from controllers.admin_controller import get_cuentas_pendientes, aprobar_cuenta, rechazar_cuenta, get_facultades, get_programas
+from controllers.ranking_controller import get_ranking_semilleros, get_ranking_investigadores, get_kpis, get_indicadores_facultad, get_hoja_vida
+from middleware.auth import authenticate_token, require_role, optional_auth
 
 # Blueprint para autenticación
 auth_bp = Blueprint('auth', __name__)
