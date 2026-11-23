@@ -23,7 +23,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Pantalla login → botón "No tengo cuenta" → formulario de registro |
 | **Página HTML** | `view-login` (formualrio registro) |
 | **Endpoint API** | `POST /api/auth/register` |
-| **Controller** | `authController.register` |
+| **Controller (Python/Flask)** | `auth_controller.register` |
 | **Tablas BD** | `usuario`, `rol`, `usuario_programa` |
 | **Estado BD** | `usuario.estado = 'pendiente'` |
 | **Servicio Docker** | `riul-api`, `riul-db` |
@@ -36,9 +36,9 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Pantalla login → formulario email/contraseña |
 | **Página HTML** | `view-login` (formulario login) |
 | **Endpoint API** | `POST /api/auth/login` |
-| **Controller** | `authController.login` |
+| **Controller (Python/Flask)** | `auth_controller.login` |
 | **Tablas BD** | `usuario`, `rol`, `nivel` |
-| **Middleware** | `authenticateToken` (verifica JWT) |
+| **Middleware (Python/Flask)** | `authenticateToken` (verifica JWT) |
 | **Servicio Docker** | `riul-api`, `riul-db` |
 
 ### RF01.3: Perfil de usuario con hoja de vida investigativa
@@ -49,7 +49,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Mi perfil" |
 | **Página HTML** | `view-perfil` |
 | **Endpoint API** | `GET /api/auth/me` |
-| **Controller** | `authController.getMe` |
+| **Controller (Python/Flask)** | `auth_controller.getMe` |
 | **Tablas BD** | `usuario`, `perfil_investigador`, `usuario_programa`, `usuario_insignia`, `insignia` |
 | **Vista BD** | `v_hoja_vida_investigativa` |
 | **Servicio Docker** | `riul-api`, `riul-db`, `riul-web` |
@@ -62,7 +62,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Selector de rol en topbar |
 | **Página HTML** | Todas las vistas (topbar) |
 | **Endpoint API** | Múltiples (middleware `requireRole`) |
-| **Middleware** | `requireRole` (verifica permisos) |
+| **Middleware (Python/Flask)** | `requireRole` (verifica permisos) |
 | **Tablas BD** | `rol`, `usuario.rol_id` |
 | **Servicio Docker** | `riul-api`, `riul-db` |
 
@@ -74,7 +74,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | No visible en prototipo (simulado) |
 | **Página HTML** | N/A |
 | **Endpoint API** | `GET /api/admin/cuentas-pendientes` |
-| **Controller** | `adminController.getCuentasPendientes` |
+| **Controller (Python/Flask)** | `adminController (Python/Flask).getCuentasPendientes` |
 | **Tablas BD** | `usuario.estado` (ENUM) |
 | **Vista BD** | `v_cuentas_pendientes` |
 | **Función BD** | `validar_cuenta` |
@@ -92,7 +92,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Gestión de semillero" |
 | **Página HTML** | `view-semillero` |
 | **Endpoint API** | `GET /api/semilleros`, `GET /api/semilleros/:id` |
-| **Controller** | `semilleroController.getSemilleros`, `getSemilleroById` |
+| **Controller (Python/Flask)** | `semilleroController (Python/Flask).getSemilleros`, `getSemilleroById` |
 | **Tablas BD** | `semillero`, `facultad`, `programa`, `usuario` (líder) |
 | **Servicio Docker** | `riul-api`, `riul-db`, `riul-web` |
 
@@ -115,7 +115,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | No visible en prototipo |
 | **Página HTML** | N/A |
 | **Endpoint API** | `POST /api/semilleros/solicitar-vinculacion`, `POST /api/semilleros/resolver-vinculacion` |
-| **Controller** | `semilleroController.solicitarVinculacion`, `resolverVinculacion` |
+| **Controller (Python/Flask)** | `semilleroController (Python/Flask).solicitarVinculacion`, `resolverVinculacion` |
 | **Tablas BD** | `semillero_integrante` |
 | **Función BD** | `solicitar_vinculacion`, `resolver_vinculacion` |
 | **Trigger BD** | `trg_semillero_integrante_unico` (impide doble vinculación) |
@@ -216,7 +216,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Publicaciones" → modal "Crear publicación" |
 | **Página HTML** | `view-publicaciones`, `modal-post` |
 | **Endpoint API** | `GET /api/publicaciones`, `POST /api/publicaciones` |
-| **Controller** | `publicacionController.getPublicaciones`, `createPublicacion` |
+| **Controller (Python/Flask)** | `publicacionController (Python/Flask).getPublicaciones`, `createPublicacion` |
 | **Tablas BD** | `publicacion`, `categoria_publicacion`, `evidencia`, `publicacion_evidencia` |
 | **Función BD** | `registrar_publicacion` (inserta XP) |
 | **Trigger BD** | Notificaciones a seguidores |
@@ -230,7 +230,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Publicaciones" → botón "Comentar" en posts |
 | **Página HTML** | `view-publicaciones` |
 | **Endpoint API** | `POST /api/publicaciones/comentar` |
-| **Controller** | `publicacionController.comentar` |
+| **Controller (Python/Flask)** | `publicacionController (Python/Flask).comentar` |
 | **Tablas BD** | `comentario` |
 | **Función BD** | `comentar_publicacion` (inserta XP, notifica autor) |
 | **Servicio Docker** | `riul-api`, `riul-db` |
@@ -243,7 +243,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Publicaciones" → botón "Reaccionar" en posts |
 | **Página HTML** | `view-publicaciones` |
 | **Endpoint API** | `POST /api/publicaciones/reaccionar` |
-| **Controller** | `publicacionController.reaccionar` |
+| **Controller (Python/Flask)** | `publicacionController (Python/Flask).reaccionar` |
 | **Tablas BD** | `reaccion`, `tipo_reaccion` (ENUM) |
 | **Restricción BD** | UNIQUE (publicacion_id, usuario_id, tipo) |
 | **Trigger BD** | `trg_reaccion_unico` (impide doble reacción) |
@@ -258,7 +258,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Publicaciones" → botón "Compartir" en posts |
 | **Página HTML** | `view-publicaciones` |
 | **Endpoint API** | `POST /api/publicaciones/compartir` |
-| **Controller** | `publicacionController.compartir` |
+| **Controller (Python/Flask)** | `publicacionController (Python/Flask).compartir` |
 | **Tablas BD** | `compartido` |
 | **Servicio Docker** | `riul-api`, `riul-db` |
 
@@ -304,7 +304,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Mi perfil" → formulario "Registrar nuevo logro" |
 | **Página HTML** | `view-perfil` |
 | **Endpoint API** | `POST /api/logros`, `GET /api/logros/mis-logros` |
-| **Controller** | `logroController.enviarLogro`, `getMisLogros` |
+| **Controller (Python/Flask)** | `logroController (Python/Flask).enviarLogro`, `getMisLogros` |
 | **Tablas BD** | `logro`, `logro_evidencia`, `evidencia` |
 | **Estado BD** | `logro.estado = 'enviado'` |
 | **Servicio Docker** | `riul-api`, `riul-db`, `riul-web` |
@@ -317,9 +317,9 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Validaciones" → tabla "Logros pendientes" |
 | **Página HTML** | `view-admin` |
 | **Endpoint API** | `GET /api/logros/pendientes`, `POST /api/logros/:id/aprobar`, `POST /api/logros/:id/rechazar` |
-| **Controller** | `logroController.getLogrosPendientes`, `aprobarLogro`, `rechazarLogro` |
+| **Controller (Python/Flask)** | `logroController (Python/Flask).getLogrosPendientes`, `aprobarLogro`, `rechazarLogro` |
 | **Tablas BD** | `logro.validado_por`, `logro.fecha_validacion` |
-| **Middleware** | `requireRole(['administrador'])` |
+| **Middleware (Python/Flask)** | `requireRole(['administrador'])` |
 | **Vista BD** | `v_logros_pendientes` |
 | **Servicio Docker** | `riul-api`, `riul-db`, `riul-web` |
 
@@ -370,7 +370,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Ranking" → tabla ordenable |
 | **Página HTML** | `view-ranking` |
 | **Endpoint API** | `GET /api/ranking/semilleros`, `GET /api/ranking/investigadores` |
-| **Controller** | `rankingController.getRankingSemilleros`, `getRankingInvestigadores` |
+| **Controller (Python/Flask)** | `rankingController (Python/Flask).getRankingSemilleros`, `getRankingInvestigadores` |
 | **Tablas BD** | `usuario.xp_total`, `semillero` |
 | **Vista BD** | `v_ranking_semilleros`, `v_ranking_investigadores` |
 | **Servicio Docker** | `riul-api`, `riul-db`, `riul-web` |
@@ -400,7 +400,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Dashboard" → 4 KPIs (XP, nivel, insignias, ranking) |
 | **Página HTML** | `view-dashboard` |
 | **Endpoint API** | `GET /api/ranking/kpis` |
-| **Controller** | `rankingController.getKPIs` |
+| **Controller (Python/Flask)** | `rankingController (Python/Flask).getKPIs` |
 | **Vista BD** | `v_kpis_institucionales` |
 | **Servicio Docker** | `riul-api`, `riul-db`, `riul-web` |
 
@@ -412,7 +412,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Ranking" → tabla de semilleros |
 | **Página HTML** | `view-ranking` |
 | **Endpoint API** | `GET /api/ranking/semilleros` |
-| **Controller** | `rankingController.getRankingSemilleros` |
+| **Controller (Python/Flask)** | `rankingController (Python/Flask).getRankingSemilleros` |
 | **Vista BD** | `v_ranking_semilleros` |
 | **Servicio Docker** | `riul-api`, `riul-db`, `riul-web` |
 
@@ -424,7 +424,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | No visible en prototipo |
 | **Página HTML** | N/A |
 | **Endpoint API** | `GET /api/ranking/investigadores` |
-| **Controller** | `rankingController.getRankingInvestigadores` |
+| **Controller (Python/Flask)** | `rankingController (Python/Flask).getRankingInvestigadores` |
 | **Vista BD** | `v_ranking_investigadores` |
 | **Servicio Docker** | `riul-api`, `riul-db` |
 
@@ -458,7 +458,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | No visible en prototipo |
 | **Página HTML** | N/A |
 | **Endpoint API** | `GET /api/ranking/indicadores-facultad` |
-| **Controller** | `rankingController.getIndicadoresFacultad` |
+| **Controller (Python/Flask)** | `rankingController (Python/Flask).getIndicadoresFacultad` |
 | **Vista BD** | `v_indicadores_facultad`, `v_indicadores_programa` |
 | **Servicio Docker** | `riul-api`, `riul-db` |
 
@@ -470,7 +470,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 | **Prototipo** | Vista "Mi perfil" → "Hoja de vida investigativa" |
 | **Página HTML** | `view-perfil` |
 | **Endpoint API** | `GET /api/ranking/hoja-vida/:usuario_id` |
-| **Controller** | `rankingController.getHojaVida` |
+| **Controller (Python/Flask)** | `rankingController (Python/Flask).getHojaVida` |
 | **Vista BD** | `v_hoja_vida_investigativa` |
 | **Servicio Docker** | `riul-api`, `riul-db`, `riul-web` |
 
@@ -484,7 +484,7 @@ Este documento traza la relación entre requerimientos funcionales (RF), element
 |----------|---------|
 | **RNF** | RNF01 - Seguridad (JWT, roles, bcrypt, permisos mínimos) |
 | **Prototipo** | N/A (simulado) |
-| **Middleware** | `authenticateToken` (JWT), `requireRole` (control de acceso) |
+| **Middleware (Python/Flask)** | `authenticateToken` (JWT), `requireRole` (control de acceso) |
 | **Librerías** | `bcrypt` (hash), `jsonwebtoken` (JWT) |
 | **BD Roles** | `riul_app` (permisos mínimos), `riul_readonly` (solo lectura) |
 | **BD Scripts** | `05_roles_security.sql` |

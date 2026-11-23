@@ -147,18 +147,21 @@ DB_USER=riul_app
 DB_PASSWORD=cambiar_esto_en_produccion
 ```
 
-### Desde Node.js
+### Desde Python (Flask)
 
-```javascript
-const { Pool } = require('pg');
+```python
+import psycopg2
+from psycopg2 import pool
 
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-});
+connection_pool = psycopg2.pool.SimpleConnectionPool(
+    host=os.getenv('DB_HOST'),
+    port=int(os.getenv('DB_PORT', 5432)),
+    database=os.getenv('DB_NAME'),
+    user=os.getenv('DB_USER'),
+    password=os.getenv('DB_PASSWORD'),
+    minconn=1,
+    maxconn=20
+)
 ```
 
 ### Desde Adminer

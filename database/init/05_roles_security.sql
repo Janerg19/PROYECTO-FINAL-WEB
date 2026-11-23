@@ -7,7 +7,7 @@
 -- CREAR ROLES DE BASE DE DATOS
 -- ==========================================
 
--- Rol de aplicación (para conexión desde Node.js)
+-- Rol de aplicación (para conexión desde Python/Flask)
 -- Permisos mínimos: solo lo necesario para la aplicación
 DO $$
 BEGIN
@@ -17,7 +17,7 @@ BEGIN
 END
 $$;
 
-COMMENT ON ROLE riul_app IS 'Rol de aplicación con permisos mínimos para conectar desde Node.js';
+COMMENT ON ROLE riul_app IS 'Rol de aplicación con permisos mínimos para conectar desde Python/Flask';
 
 -- Rol de solo lectura para analítica
 DO $$

@@ -2,6 +2,12 @@
 
 Segundo corte de la plataforma institucional para conectar a quienes investigan en la Universidad Libre (semilleros, proyectos, publicaciones, eventos, convocatorias, logros y gamificación).
 
+**Stack Tecnológico:**
+- **Backend**: Python 3.11 + Flask + psycopg2 + PyJWT + bcrypt
+- **Frontend**: HTML + CSS + JavaScript vanilla (sin frameworks)
+- **Base de Datos**: PostgreSQL 16
+- **Orquestación**: Docker + Docker Compose
+
 ## 📋 Índice
 
 - [Requisitos](#requisitos)
@@ -43,9 +49,9 @@ riul/
 │   ├── ER_diagram.md             # Diagrama ER en Mermaid
 │   ├── diccionario_de_datos.md   # Diccionario de datos completo
 │   └── README_db.md              # Documentación de la BD
-├── api/                       # Backend (Python + Flask)
-│   ├── Dockerfile               # Multi-stage build
-│   ├── requirements.txt        # Dependencias de Python
+├── api/                       # Backend (Python 3.11 + Flask)
+│   ├── Dockerfile               # Build con Python
+│   ├── requirements.txt        # Dependencias de Python (Flask, psycopg2, PyJWT, bcrypt)
 │   └── src/
 │       ├── config/
 │       │   └── database.py      # Configuración de PostgreSQL
@@ -113,9 +119,9 @@ docker compose up --build
 ```
 
 Este comando:
-- Construye las imágenes Docker de la API y el frontend
+- Construye las imágenes Docker de la API (Python/Flask) y el frontend
 - Levanta PostgreSQL y ejecuta los scripts de inicialización (`database/init/`)
-- Levanta la API Node.js (espera a que la BD esté healthy)
+- Levanta la API Python/Flask (espera a que la BD esté healthy)
 - Levanta nginx sirviendo el frontend y haciendo proxy a la API
 - Levanta Adminer para inspeccionar la BD
 
@@ -283,7 +289,7 @@ docker compose down
 
 ### 6. Stack Tecnológico Obligatorio
 
-**Decisión**: Sin frameworks (React/Vue/Angular), sin ORM, solo tecnologías especificadas.
+**Decisión**: Backend en Python 3.11 + Flask, frontend sin frameworks (React/Vue/Angular), sin ORM, solo tecnologías especificadas.
 
 **Justificación**:
 - Requisito académico del proyecto
@@ -373,7 +379,7 @@ docker compose down
 
 ## Limitaciones Conocidas
 
-1. **Subida de archivos**: La infraestructura para evidencias está diseñada en BD (tabla `evidencia`) pero la implementación con `multer` en la API y el volumen Docker están pendientes.
+1. **Subida de archivos**: La infraestructura para evidencias está diseñada en BD (tabla `evidencia`) pero la implementación en la API Python y el volumen Docker están pendientes.
 2. **Notificaciones en frontend**: El icono de campana existe pero no muestra notificaciones en tiempo real (las notificaciones se crean en BD correctamente).
 3. **Seguimiento**: La funcionalidad de follow entre usuarios/semilleros está diseñada en BD pero no implementada en el frontend.
 4. **Responsive**: El CSS del prototipo tiene media queries pero no ha sido testeado exhaustivamente en móviles.
@@ -382,7 +388,7 @@ docker compose down
 
 ## Próximos Pasos Sugeridos
 
-1. Implementar subida de archivos con `multer` y volumen Docker
+1. Implementar subida de archivos en la API Python y volumen Docker
 2. Implementar endpoint de notificaciones en frontend
 3. Implementar funcionalidad de seguimiento (follow)
 4. Agregar más pruebas unitarias y de integración
