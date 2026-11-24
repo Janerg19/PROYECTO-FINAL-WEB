@@ -222,7 +222,7 @@ class InvestigacionService:
             proyecto_id=proyecto_id,
             titulo=data['titulo'],
             descripcion=data.get('descripcion'),
-            fecha_avance=data.get('fecha_avencia', datetime.utcnow().date()),
+            fecha_avance=data.get('fecha_avance', datetime.utcnow().date()),
             creado_por=creador_id
         )
         
@@ -274,5 +274,5 @@ class InvestigacionService:
         usuario.xp_total += tipo.xp_base
         
         # Recalcular nivel (simplificado, debería usar servicio de usuarios)
-        from services.usuarios import UsuarioService
+        from app.services.usuarios import UsuarioService
         UsuarioService._recalcular_nivel(usuario)
