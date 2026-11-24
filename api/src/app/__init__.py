@@ -2,9 +2,9 @@ from flask import Flask
 from flask_cors import CORS
 from flasgger import Swagger
 from flask_jwt_extended import JWTManager
-from config import Config
-from extensions import db, jwt, swagger
-from utils.errors import register_error_handlers
+from app.config import Config
+from app.extensions import db, jwt, swagger
+from app.utils.errors import register_error_handlers
 
 
 def create_app(config_class=Config):
@@ -15,18 +15,43 @@ def create_app(config_class=Config):
     # Inicializar extensiones
     db.init_app(app)
     jwt.init_app(app)
-    swagger.init_app(app)
     CORS(app)
+    
+    # Configurar Swagger/OpenAPI
+    swagger_template = {
+        "info": {
+            "title": "RIUL API",
+            "description": "API REST para Red de Investigación Universidad Libre",
+            "version": "3.0",
+            "contact": {
+                "name": "Universidad Libre"
+            }
+        },
+        "securityDefinitions": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": "JWT token en formato: Bearer {token}"
+            }
+        },
+        "security": [
+            {
+                "Bearer": []
+            }
+        ]
+    }
+    swagger.init_app(app, template=swagger_template)
     
     # Registrar manejadores de error
     register_error_handlers(app)
     
     # Registrar blueprints
-    from routes.usuarios import usuarios_bp
-    from routes.investigacion import investigacion_bp
-    from routes.eventos import eventos_bp
-    from routes.comunidad import comunidad_bp
-    from routes.gamificacion import gamificacion_bp
+    from app.routes.usuarios import usuarios_bp
+    from app.routes.investigacion import investigacion_bp
+    from app.routes.eventos import eventos_bp
+    from app.routes.comunidad import comunidad_bp
+    from app.routes.gamificacion import gamificacion_bp
     
     app.register_blueprint(usuarios_bp, url_prefix='/api')
     app.register_blueprint(investigacion_bp, url_prefix='/api')
@@ -40,5 +65,10 @@ def create_app(config_class=Config):
     
     # Configurar strict_slashes
     app.url_map.strict_slashes = False
+    
+    # Endpoint de health check
+    @app.route('/api/health')
+    def health():
+        return {'status': 'ok', 'message': 'API RIUL funcionando'}, 200
     
     return app
