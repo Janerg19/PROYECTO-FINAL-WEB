@@ -99,27 +99,27 @@ INSERT INTO categoria_publicacion (nombre, descripcion, color) VALUES
 
 INSERT INTO usuario (rol_id, nombres, apellidos, email, password_hash, estado, xp_total, nivel_id) VALUES
 -- Administrador
-(4, 'Alfonso', 'Lopez', 'admin@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 2500, 4),
+((SELECT id FROM rol WHERE nombre = 'administrador'), 'Alfonso', 'Lopez', 'admin@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 2500, 4),
 
 -- Docentes líderes
-(3, 'Andrea', 'Molina', 'docente1@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 1800, 3),
-(3, 'Roberto', 'Sánchez', 'docente2@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 1500, 3),
-(3, 'María', 'García', 'docente3@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 1200, 2),
+((SELECT id FROM rol WHERE nombre = 'docente'), 'Andrea', 'Molina', 'docente1@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 1800, 3),
+((SELECT id FROM rol WHERE nombre = 'docente'), 'Roberto', 'Sánchez', 'docente2@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 1500, 3),
+((SELECT id FROM rol WHERE nombre = 'docente'), 'María', 'García', 'docente3@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 1200, 3),
 
 -- Estudiantes
-(1, 'Juliana', 'Díaz', 'estudiante1@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 1240, 3),
-(1, 'Camilo', 'Rojas', 'estudiante2@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 980, 2),
-(1, 'Laura', 'Gómez', 'estudiante3@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 850, 2),
-(1, 'David', 'Ruiz', 'estudiante4@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 720, 2),
-(1, 'Paula', 'León', 'estudiante5@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 650, 2),
-(1, 'Iván', 'Cárdenas', 'estudiante6@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 580, 1),
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'Juliana', 'Díaz', 'estudiante1@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 1240, 3),
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'Camilo', 'Rojas', 'estudiante2@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 980, 2),
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'Laura', 'Gómez', 'estudiante3@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 850, 2),
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'David', 'Ruiz', 'estudiante4@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 720, 2),
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'Paula', 'León', 'estudiante5@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 650, 2),
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'Iván', 'Cárdenas', 'estudiante6@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'aprobada', 580, 2),
 
 -- Cuentas pendientes
-(1, 'Ana', 'Martínez', 'ana.martinez@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'pendiente', 0, 1),
-(1, 'Juan', 'Torres', 'juan.torres@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'pendiente', 0, 1),
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'Ana', 'Martínez', 'ana.martinez@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'pendiente', 0, 1),
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'Juan', 'Torres', 'juan.torres@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'pendiente', 0, 1),
 
 -- Cuenta rechazada
-(1, 'Pedro', 'Vargas', 'pedro.vargas@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'rechazada', 0, 1);
+((SELECT id FROM rol WHERE nombre = 'estudiante'), 'Pedro', 'Vargas', 'pedro.vargas@unilibre.edu.co', '$2b$10$rTBA4pWTVYnlMJYmH6kP..sJ1UAVmQ.frNS4DgrtX21lMRwVTxWVe', 'rechazada', 0, 1);
 
 -- Actualizar validador para el admin
 UPDATE usuario SET validado_por = 1, fecha_validacion = CURRENT_TIMESTAMP WHERE id = 1;
@@ -311,12 +311,12 @@ INSERT INTO convocatoria (titulo, descripcion, estado, fecha_apertura, fecha_cie
 -- POSTULACIONES A CONVOCATORIAS
 -- ==========================================
 
-INSERT INTO postulacion_convocatoria (convocatoria_id, usuario_id, propuesta, estado, fecha_postulacion) VALUES
-(1, 5, 'Proyecto: Plataforma de trazabilidad académica - fase 2', 'aprobada', '2026-09-10'),
-(1, 7, 'Proyecto: Análisis genómico de especies nativas - fase 2', 'en_revision', '2026-09-15'),
-(2, 5, 'Ponencia: Congreso Internacional de Ingeniería de Software', 'enviada', '2026-10-10'),
-(2, 7, 'Ponencia: Congreso de Bioinformática', 'enviada', '2026-10-12'),
-(3, 2, 'Artículo: Trazabilidad académica con PostgreSQL', 'aprobada', '2026-09-20');
+INSERT INTO postulacion_convocatoria (convocatoria_id, usuario_id, propuesta, estado, fecha_postulacion, fecha_resolucion, revisado_por) VALUES
+(1, 5, 'Proyecto: Plataforma de trazabilidad académica - fase 2', 'aprobada', '2026-09-10', '2026-09-15', (SELECT id FROM usuario WHERE email = 'admin@unilibre.edu.co')),
+(1, 7, 'Proyecto: Análisis genómico de especies nativas - fase 2', 'en_revision', '2026-09-15', NULL, NULL),
+(2, 5, 'Ponencia: Congreso Internacional de Ingeniería de Software', 'enviada', '2026-10-10', NULL, NULL),
+(2, 7, 'Ponencia: Congreso de Bioinformática', 'rechazada', '2026-10-12', '2026-10-20', (SELECT id FROM usuario WHERE email = 'admin@unilibre.edu.co')),
+(3, 2, 'Artículo: Trazabilidad académica con PostgreSQL', 'aprobada', '2026-09-20', '2026-09-25', (SELECT id FROM usuario WHERE email = 'admin@unilibre.edu.co'));
 
 -- ==========================================
 -- PUBLICACIONES
