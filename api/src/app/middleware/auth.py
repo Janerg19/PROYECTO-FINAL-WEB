@@ -1,7 +1,7 @@
 from functools import wraps
 from flask import request
 from flask_jwt_extended import verify_jwt_in_request, get_jwt_identity, get_jwt
-from utils.errors import AuthorizationError, AuthenticationError
+from app.utils.errors import AuthorizationError, AuthenticationError
 
 
 def roles_required(*roles):

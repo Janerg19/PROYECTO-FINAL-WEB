@@ -5,7 +5,8 @@ from app.models.comunidad import (
     SeguimientoUsuario, SeguimientoSemillero, Notificacion,
     CategoriaPublicacion, Evidencia, PublicacionEvidencia
 )
-from app.models.usuarios import Usuario, TipoActividadXP, MovimientoXP
+from app.models.gamificacion import TipoActividadXP, MovimientoXP
+from app.models.usuarios import Usuario
 from app.utils.errors import ValidationError, NotFoundError, ConflictError
 
 

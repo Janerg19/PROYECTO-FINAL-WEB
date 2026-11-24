@@ -1,4 +1,4 @@
-from extensions import db
+from app.extensions import db
 
 # Importar todos los modelos para que SQLAlchemy los registre
 from .usuarios import (

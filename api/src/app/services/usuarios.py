@@ -2,7 +2,8 @@ import bcrypt
 from datetime import datetime
 from flask_jwt_extended import create_access_token
 from app.extensions import db
-from app.models.usuarios import Usuario, Rol, PerfilInvestigador, UsuarioPrograma, TipoActividadXP, MovimientoXP, Nivel
+from app.models.usuarios import Usuario, Rol, PerfilInvestigador, UsuarioPrograma
+from app.models.gamificacion import TipoActividadXP, MovimientoXP, Nivel
 from app.utils.errors import ValidationError, AuthenticationError, NotFoundError, ConflictError, AuthorizationError
 
 

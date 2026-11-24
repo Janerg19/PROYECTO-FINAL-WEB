@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flasgger import Swagger
 from flask_jwt_extended import JWTManager
 from app.config import Config
-from app.extensions import db, jwt, swagger
+from app.extensions import db, jwt
 from app.utils.errors import register_error_handlers
 
 
@@ -41,7 +41,8 @@ def create_app(config_class=Config):
             }
         ]
     }
-    swagger.init_app(app, template=swagger_template)
+    swagger = Swagger(template=swagger_template)
+    swagger.init_app(app)
     
     # Registrar manejadores de error
     register_error_handlers(app)
