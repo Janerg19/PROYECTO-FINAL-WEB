@@ -1,12 +1,13 @@
 # RIUL - Red de Investigación Universidad Libre
 
-Segundo corte de la plataforma institucional para conectar a quienes investigan en la Universidad Libre (semilleros, proyectos, publicaciones, eventos, convocatorias, logros y gamificación).
+Plataforma institucional para conectar a quienes investigan en la Universidad Libre (semilleros, proyectos, publicaciones, eventos, convocatorias, logros y gamificación).
 
-**Stack Tecnológico:**
-- **Backend**: Python 3.11 + Flask + psycopg2 + PyJWT + bcrypt
-- **Frontend**: HTML + CSS + JavaScript vanilla (sin frameworks)
+**Stack Tecnológico (Tercer Corte):**
+- **Backend**: Python 3.12 + Flask 3 + SQLAlchemy 2.x + Flask-JWT-Extended + bcrypt + marshmallow + flasgger + gunicorn
 - **Base de Datos**: PostgreSQL 16
+- **Frontend**: HTML + CSS + JavaScript vanilla (sin frameworks)
 - **Orquestación**: Docker + Docker Compose
+- **Documentación API**: Swagger/OpenAPI en `/api/docs`
 
 ## 📋 Índice
 
@@ -23,7 +24,7 @@ Segundo corte de la plataforma institucional para conectar a quienes investigan 
 ## Requisitos
 
 - **Docker** y **Docker Compose** instalados
-- **Python** 3.11+ (para desarrollo local, opcional)
+- **Python** 3.12+ (para desarrollo local, opcional)
 - **PostgreSQL** 16+ (para desarrollo local, opcional)
 
 ---
@@ -49,23 +50,49 @@ riul/
 │   ├── ER_diagram.md             # Diagrama ER en Mermaid
 │   ├── diccionario_de_datos.md   # Diccionario de datos completo
 │   └── README_db.md              # Documentación de la BD
-├── api/                       # Backend (Python 3.11 + Flask)
-│   ├── Dockerfile               # Build con Python
-│   ├── requirements.txt        # Dependencias de Python (Flask, psycopg2, PyJWT, bcrypt)
+├── api/                       # Backend (Python 3.12 + Flask + SQLAlchemy)
+│   ├── Dockerfile               # Build con Python y gunicorn
+│   ├── requirements.txt        # Dependencias de Python
+│   ├── wsgi.py                 # Entry point para gunicorn
 │   └── src/
-│       ├── config/
-│       │   └── database.py      # Configuración de PostgreSQL
-│       ├── middleware/
-│       │   └── auth.py         # Autenticación JWT y roles
-│       ├── controllers/
-│       │   ├── auth_controller.py
-│       │   ├── publicacion_controller.py
-│       │   ├── semillero_controller.py
-│       │   ├── logro_controller.py
-│       │   ├── admin_controller.py
-│       │   └── ranking_controller.py
-│       ├── routes.py            # Definición de rutas
-│       └── app.py               # Punto de entrada Flask
+│       └── app/
+│           ├── __init__.py       # Application factory
+│           ├── config.py         # Configuración por entorno
+│           ├── extensions.py     # db, jwt, swagger
+│           ├── models/           # Modelos SQLAlchemy (35 tablas)
+│           │   ├── usuarios.py
+│           │   ├── investigacion.py
+│           │   ├── eventos.py
+│           │   ├── comunidad.py
+│           │   └── gamificacion.py
+│           ├── schemas/          # Marshmallow schemas
+│           │   ├── usuarios.py
+│           │   ├── investigacion.py
+│           │   ├── eventos.py
+│           │   ├── comunidad.py
+│           │   └── gamificacion.py
+│           ├── routes/           # Blueprints Flask
+│           │   ├── usuarios.py
+│           │   ├── investigacion.py
+│           │   ├── eventos.py
+│           │   ├── comunidad.py
+│           │   └── gamificacion.py
+│           ├── controllers/      # Manejo HTTP
+│           │   ├── usuarios.py
+│           │   ├── investigacion.py
+│           │   ├── eventos.py
+│           │   ├── comunidad.py
+│           │   └── gamificacion.py
+│           ├── services/         # Reglas de negocio
+│           │   ├── usuarios.py
+│           │   ├── investigacion.py
+│           │   ├── eventos.py
+│           │   ├── comunidad.py
+│           │   └── gamificacion.py
+│           ├── middleware/       # Autenticación
+│           │   └── auth.py
+│           └── utils/            # Helpers
+│               └── errors.py
 ├── web/                       # Frontend (HTML + CSS + JS vanilla)
 │   ├── Dockerfile               # Build con nginx
 │   ├── nginx/
@@ -84,6 +111,9 @@ riul/
     │   ├── Descripcion_del_proyecto_RIUL.docx
     │   └── RIUL WORKFLOW.pdf
     ├── trazabilidad.md          # Matriz RF → Prototipo → HTML → API → BD → Docker
+    ├── permisos.md             # Matriz de permisos por rol
+    ├── cambios_tercer_corte.md # Justificación de cambios del tercer corte
+    ├── estado_actual.md        # Estado actual del proyecto
     └── INVENTARIO.md            # Inventario completo del proyecto
 ```
 
